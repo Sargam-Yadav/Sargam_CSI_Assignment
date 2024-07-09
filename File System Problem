@@ -1,0 +1,52 @@
+import os
+import shutil
+
+def create_directory(path):
+    """Create a directory if it doesn't exist."""
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+            print(f"Directory {path} created successfully.")
+        else:
+            print(f"Directory {path} already exists.")
+    except OSError as error:
+        print(f"Error creating directory {path}: {error}")
+
+def create_file(file_path, content):
+    """Create a file and write content to it."""
+    try:
+        with open(file_path, 'w') as file:
+            file.write(content)
+        print(f"File {file_path} created successfully.")
+    except OSError as error:
+        print(f"Error creating file {file_path}: {error}")
+
+def move_file(src, dst):
+    """Move a file from src to dst."""
+    try:
+        shutil.move(src, dst)
+        print(f"File moved from {src} to {dst} successfully.")
+    except OSError as error:
+        print(f"Error moving file from {src} to {dst}: {error}")
+
+def delete_file(file_path):
+    """Delete a specified file."""
+    try:
+        os.remove(file_path)
+        print(f"File {file_path} deleted successfully.")
+    except OSError as error:
+        print(f"Error deleting file {file_path}: {error}")
+
+# Example usage
+if __name__ == "__main__":
+    # Create a directory
+    create_directory('example_dir')
+
+    # Create a file in the directory with some content
+    create_file('example_dir/example.txt', 'This is an example file.')
+
+    # Move the file to a new location
+    move_file('example_dir/example.txt', 'example_dir/example_moved.txt')
+
+    # Delete the moved file
+    delete_file('example_dir/example_moved.txt')
